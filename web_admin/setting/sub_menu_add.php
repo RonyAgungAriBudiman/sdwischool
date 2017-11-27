@@ -84,7 +84,7 @@ if(isset($_POST['Simpan']) or isset($_POST["Update"])){
 		 			  pg_title='$pg_name',nourut='$nourut',pg_image='$pg_image',
 						pg_link='$pg_link', recuserupd='".$_SESSION['Ses_User']."', 
 						recdateupd='".date("Y-m-d H:m:s")."'
-		               WHERE pg_no='$pg_no' and type='S' ";
+		               WHERE sm_no='$sm_no' and type='S' ";
 		$msQry=mysql_query($mysql, $koneksidb) or die ("Gagal query Update");
 		if($msQry)
 			{			
@@ -100,7 +100,7 @@ if(isset($_POST['Simpan']) or isset($_POST["Update"])){
 if($Edit)
 	{	
 		//---- query  untuk menampilkan data dari lemparan variabel edit ---//
-		$mysql			= mysql_query("SELECT A.* FROM M_MENU AS A Where A.pg_no = '$Kode' and A.type = 'S'", $koneksidb);
+		$mysql			= mysql_query("SELECT A.* FROM M_MENU AS A Where A.sm_no = '$Kode' and A.type = 'S'", $koneksidb);
 		$myCount	    = mysql_num_rows($mysql);	
 		$mydata	    	= mysql_fetch_array($mysql);	
 		$mn_no			= $mydata["mn_no"];
@@ -108,6 +108,7 @@ if($Edit)
 		$pg_name		= $mydata["pg_name"];
 		$pg_image		= $mydata["pg_image"];
 		$pg_link		= $mydata["pg_link"];
+		$nourut			= $mydata["nourut"];
 	}	
 	
 
@@ -128,7 +129,7 @@ if($Edit)
 				<div class="col-md-8">
 					 <select class="form-control" id="mn_no" name="mn_no"  <? if ($Edit == "Edit") { echo "disabled = disabled";} ?> >
 				 
-						<option value="<?php echo $mylist2["mn_no"]; ?>"  selected> <?php echo $mylist2["pg_name"]; ?></option> 
+						<option value="<?php echo $mn_no; ?>"  selected> <?php echo $pg_name; ?></option> 
 	   	
 								  <?php				
 									$result 	= mysql_query("SELECT mn_no,pg_name FROM M_MENU WHERE type = 'M' Order By pg_no", $koneksidb) ;
@@ -153,7 +154,7 @@ if($Edit)
 			<div class="form-group mb-n">
 				<label class="col-md-2 control-label">IMAGE</label>
 				<div class="col-md-8">
-					<input id="pg_image" name="pg_image" type="text" value="<?php echo $pg_image; ?>"  required="required" class="form-control1"/> <label class="col-md-8 control-label">EX : lnr lnr-indent-increase</label>
+					<input id="pg_image" name="pg_image" type="text" value="<?php echo $pg_image; ?>"   class="form-control1"/> <label class="col-md-8 control-label">EX : lnr lnr-indent-increase</label>
 				</div>
 				<div class="clearfix"> </div>
 			</div>

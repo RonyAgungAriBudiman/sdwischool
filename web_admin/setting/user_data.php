@@ -26,10 +26,11 @@ if(isset($_GET['Kode'])){
 <thead>
       <tr>
         <th width="24"><b>No</b></th>
-		<th width="231"><b>User Id</b></th>
-        <th width="231"><b>User Name</b></th>
-        <th width="170"><b>Nama</b></th>
-		<th width="170"><b>Divisi</b></th>
+		<th><b>User Id</b></th>
+        <th><b>User Name</b></th>
+        <th><b>Nama</b></th>
+		<th><b>Level</b></th>
+		<th><b>Klinik</b></th>
         <th colspan="2" align="center" ><b>Tools</b><b></b></th>
         </tr>
  </thead>
@@ -47,6 +48,7 @@ if(isset($_GET['Kode'])){
         <td><?php echo $msData['username']; ?></td>
         <td><?php echo $msData['nm_user']; ?></td>
 		<td><?php echo $msData['level']; ?></td>
+		<td><?php echo $msData['id_klinik']; ?></td>
         <td width="41" align="center"><a href="?page=User-Add&Edit=Edit&Kode=<?php echo $Kode; ?>" target="_self" alt="Edit Data" class="lnr lnr-pencil" title="Edit"></a></td>
         <td width="45" align="center"><a href="?page=User-Data&Delete=Delete&Kode=<?php echo $Kode; ?>" target="_self" title="Delete" class="lnr lnr-trash" alt="Delete Data" onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS DATA PENTING INI ... ?')"></a></td>
       </tr>

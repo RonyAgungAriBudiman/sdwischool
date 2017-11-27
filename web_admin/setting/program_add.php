@@ -110,6 +110,7 @@ if($Edit)
 		$pg_name		= $mydata["pg_name"];
 		$pg_image		= $mydata["pg_image"];
 		$pg_link		= $mydata["pg_link"];
+		$nourut		= $mydata["nourut"];
 	}	
 	
 
@@ -130,7 +131,7 @@ if($Edit)
 				<div class="col-md-8">
 					 <select class="form-control" id="mn_no" name="mn_no"  <? if ($Edit == "Edit") { echo "disabled = disabled";} ?> >
 				 
-						<option value="<?php echo $mylist2["mn_no"]; ?>"  selected> <?php echo $mylist2["pg_name"]; ?></option> 
+						<option value="<?php echo $mn_no; ?>"  selected> <?php echo $pg_name; ?></option> 
 	   	
 								  <?php				
 									$result 	= mysql_query("SELECT mn_no,pg_name FROM M_MENU WHERE type = 'M' Order By pg_no", $koneksidb) ;
@@ -150,7 +151,7 @@ if($Edit)
 				<div class="col-md-8">
 					 <select class="form-control" id="sm_no" name="sm_no"  <? if ($Edit == "Edit") { echo "disabled = disabled";} ?> >
 				 
-						<option value="<?php echo $mylist2["sm_no"]; ?>"  selected> <?php echo $mylist2["pg_name"]; ?></option> 
+						<option value="<?php echo $sm_no; ?>"  selected> <?php echo $pg_name; ?></option> 
 	   	
 								  <?php				
 									$result 	= mysql_query("SELECT sm_no,pg_name FROM M_MENU WHERE type = 'S' Order By sm_no", $koneksidb) ;
@@ -175,7 +176,7 @@ if($Edit)
 			<div class="form-group mb-n">
 				<label class="col-md-2 control-label">IMAGE</label>
 				<div class="col-md-8">
-					<input id="pg_image" name="pg_image" type="text" value="<?php echo $pg_image; ?>"  required="required" class="form-control1"/>
+					<input id="pg_image" name="pg_image" type="text" value="<?php echo $pg_image; ?>"   class="form-control1"/>
 				</div>
 				<div class="clearfix"> </div>
 			</div>

@@ -65,7 +65,7 @@ if(isset($_POST['Simpan']) or isset($_POST["Update"])){
 	
 		# PROSES UPDATE 
 		$mysql  	= "UPDATE M_MENU set pg_name='$pg_name', pg_title='$pg_name',nourut='$nourut', recuserupd='".$_SESSION['Ses_User']."', recdateupd='".date("Y-m-d H:m:s")."'
-		               WHERE mn_no='$mn_no'";
+		               WHERE mn_no='$mn_no' and type='M'";
 		$msQry=mysql_query($mysql, $koneksidb) or die ("Gagal query Update");
 		if($msQry)
 			{			
@@ -81,11 +81,12 @@ if(isset($_POST['Simpan']) or isset($_POST["Update"])){
 elseif($Edit)
 	{	
 		//---- query  untuk menampilkan data dari lemparan variabel edit ---//
-		$mysql			= mysql_query("SELECT A.* FROM M_MENU AS A Where A.mn_no = '$Kode'", $koneksidb);
+		$mysql			= mysql_query("SELECT A.* FROM M_MENU AS A Where A.mn_no = '$Kode'  and A.type='M'", $koneksidb);
 		$myCount	    = mysql_num_rows($mysql);	
 		$mydata	    = mysql_fetch_array($mysql);	
 		$mn_no			    = $mydata["mn_no"];
 		$pg_name			= $mydata["pg_name"];
+		$nourut			= $mydata["nourut"];
 	}	
 else
 	{	

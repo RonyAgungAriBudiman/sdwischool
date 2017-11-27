@@ -36,6 +36,7 @@ if(isset($_POST['Simpan']) or isset($_POST["Edit"])){
 	$no_telepon		= $_POST['no_telepon'];
 	$password	= $_POST['password'];
 	$level	= $_POST['level'];
+	$id_klinik	= $_POST['id_klinik'];
 	
 	if ($Simpan == "Simpan"){
 	# VALIDASI USER LOGIN (USERNAME), jika sudah ada akan ditolak
@@ -60,13 +61,14 @@ if(isset($_POST['Simpan']) or isset($_POST["Edit"])){
 	if ($Simpan == "Simpan") {
 		# SIMPAN DATA KE DATABASE. 
 		// Jika tidak menemukan error, simpan data ke database
-		$mysql  	= "INSERT INTO M_USER (id_user, username, nm_user,no_telepon,password,level,recuser, recdate)
+		$mysql  	= "INSERT INTO M_USER (id_user, username, nm_user,no_telepon,password,level,id_klinik,recuser, recdate)
 						VALUES ('$id_user', 
 								'$username', 
 								'$nm_user',
 								'$no_telepon',
 								'".md5($password)."',
 								'$level',
+								'$id_klinik',
 								'".$_SESSION['NIK_Session']."',
 								'".date("Y-m-d H:m:s")."')";
 		$msQry=mysql_query($mysql, $koneksidb) or die ("Gagal query Simpan");
@@ -86,7 +88,7 @@ if(isset($_POST['Simpan']) or isset($_POST["Edit"])){
 		//}
 		# SIMPAN DATA KE DATABASE. 
 		// Jika tidak menemukan error, simpan data ke database
-		$mysql  	= "UPDATE M_USER set username='$username', nm_user='$nm_user',no_telepon='$no_telepon',password='".md5($password)."',level='$level',
+		$mysql  	= "UPDATE M_USER set username='$username', nm_user='$nm_user',no_telepon='$no_telepon',password='".md5($password)."',level='$level',id_klinik='$id_klinik',
 		               recuserupd='".$_SESSION['NIK_Session']."', recdateupd='".date("Y-m-d H:m:s")."'
 		               WHERE id_user='$id_user'";
 		$msQry=mysql_query($mysql, $koneksidb) or die ("Gagal query Update");
@@ -111,6 +113,7 @@ elseif($Edit)
 		$no_telepon 				= $qListqres_ten["no_telepon"];
 		$password 			= $qListqres_ten["password"];;
 		$level 			= $qListqres_ten["level"];
+		$id_klinik 			= $qListqres_ten["id_klinik"];
 	}	
 else
 	{	
@@ -120,6 +123,7 @@ else
 		$no_telepon 				= isset($_POST['no_telepon']) ? $_POST['no_telepon'] : '';
 		$password 			= isset($_POST['password']) ? $_POST['password'] : '';
 		$level 			= isset($_POST['level']) ? $_POST['level'] : '';
+		$id_klinik 			= isset($_POST['id_klinik']) ? $_POST['id_klinik'] : '';
 	}	
 
 ?>
@@ -174,6 +178,27 @@ else
 				<div class="clearfix"> </div>
 			</div>
 			
+			<div class="form-group mb-n">
+				<label class="col-md-2 control-label">KLINIK</label>
+				<div class="col-md-8">
+<select name="id_klinik" class="form-control1" required>
+	  <?php if ($Edit) { echo "<option value=$id_klinik >$nama_klinik</option>";}?>
+  		<?php
+		  $mysql = "SELECT * FROM M_KLINIK ORDER BY id_klinik";
+		  $msQry = mysql_query($mysql, $koneksidb) or die ("Gagal Query");
+		  while ($msData = mysql_fetch_array($msQry)) {
+			if ($id_klinik == $msData['id_klinik']) {
+				$cek = " selected";
+			} else { $cek=""; }
+			echo "<option value='$msData[id_klinik]' $cek>$msData[nama_klinik]</option>";
+		  }
+		  $mySql ="";
+		  ?>
+  			
+  </select>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
    
    			<div class="form-group mb-n">
 				<label class="col-md-2 control-label">LEVEL</label>
